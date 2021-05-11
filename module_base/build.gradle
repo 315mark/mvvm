@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+def globalConfig = rootProject.ext
+def version = globalConfig.android
+
+android {
+
+    compileSdkVersion version.compileSdkVersion
+    buildToolsVersion version.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
+
+//        applicationId "com.bdxh.module_base"
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':librarybase')
+}

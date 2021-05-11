@@ -1,0 +1,28 @@
+apply from: "../module_base.gradle"
+
+def globalConfig = rootProject.ext
+def compilers = globalConfig.compiler
+
+android {
+
+    defaultConfig {
+        // 组件单独运行时需要的applicationId
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.bdxh.module_login"
+        }
+    }
+    //统一资源前缀，规范资源引用 尽量命名规范
+    resourcePrefix "module_login"
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+
+//    api project(path: 'module_base')
+
+    annotationProcessor compilers.router_compiler
+    api project(path: ':module_base')
+}

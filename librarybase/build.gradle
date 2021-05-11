@@ -1,0 +1,34 @@
+
+apply plugin: 'com.android.library'
+apply from: '../basic_depend.gradle'
+
+  android {
+
+  }
+
+  dependencies {
+      def dependency = rootProject.ext.dependencies
+      def compilers = rootProject.ext.compiler
+      def Router = rootProject.ext.routerDeps
+
+      api Router.router
+
+      api dependency.mmkv
+      api dependency.BRVAH
+      api dependency.utilcode
+      api dependency.aspectjrt
+      api dependency.livedatabus
+      api dependency.easypermissions
+
+      api (dependency.glide){
+         exclude group: "com.android.support"
+      }
+      annotationProcessor compilers.glide_compile
+
+      // exclude group: 排除第三方库依赖
+      api ('com.github.niorgai:StatusBarCompat:2.3.3', {
+          exclude group: 'androidx.appcompat:appcompat'
+          exclude group: 'com.google.android.material:material'
+      })
+
+  }

@@ -1,0 +1,84 @@
+android {
+
+    def globalconfig = rootProject.ext
+    def androids = globalconfig.android
+
+    compileSdkVersion androids.compileSdkVersion
+    buildToolsVersion androids.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion androids.minSdkVersion
+        targetSdkVersion androids.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support'){
+            if (!requested.name.startsWith("multidex")){
+                details.useVersion rootProject.ext.versions.appcompat
+            } else {
+                details.useVersion rootProject.ext.versions.multidex
+            }
+        }
+    }
+}
+
+// 抽取基本的依赖
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def support = rootProject.ext.androidx
+    def JetPack = rootProject.ext.jetPack
+    def rxJava = rootProject.ext.retrofit
+
+    api support.design
+    api support.appcompat
+    api support.recyclerview
+    api support.constraintlayout
+
+    api rxJava.okio
+    api rxJava.fastjson
+    api rxJava.gson
+    api rxJava.converter_gson
+    api rxJava.retrofit
+    api rxJava.adapter_rxjava
+    api rxJava.autodispose
+
+    api JetPack.multiDex
+    api JetPack.navigation_ui
+    api JetPack.navigation_fragment
+    api JetPack.lifecycle_common
+    api JetPack.lifecycle_extensions
+    api JetPack.viewmodel_savedstate
+    api JetPack.lifecycle_livedata
+
+    api (rxJava.okhttp_logging){
+        exclude group : 'com.squareup.okhttp3'
+    }
+
+    annotationProcessor rootProject.ext.compiler.lifecycle_compiler
+
+}
