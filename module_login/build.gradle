@@ -14,9 +14,16 @@ android {
     //统一资源前缀，规范资源引用 尽量命名规范
     resourcePrefix "module_login"
 
+//      这种写法已经过时
     dataBinding {
         enabled true
     }
+
+//    这个只能用build:gradle:4.0'以上的
+//    buildFeatures {
+//        dataBinding = true
+//    }
+
 }
 
 dependencies {

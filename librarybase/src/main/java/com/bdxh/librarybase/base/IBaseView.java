@@ -11,4 +11,7 @@ public interface IBaseView {
     //初始化观察者
     void initViewObservable();
 
+    //空数据点击网络加载
+    void onReload();
+
 }

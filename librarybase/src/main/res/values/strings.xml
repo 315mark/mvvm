@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LibraryBase</string>
+    <string name="image_desc">没有网络了</string>
 </resources>

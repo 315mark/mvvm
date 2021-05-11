@@ -4,8 +4,10 @@ import android.os.Handler;
 import android.widget.TextView;
 
 import com.bdxh.librarybase.base.BaseFragment;
+import com.bdxh.librarybase.base.MvvmBaseFragment;
 import com.bdxh.module_base.service.ITaskService;
 import com.bdxh.module_task.R;
+import com.bdxh.module_task.databinding.ModuleTaskFragmentTaskBinding;
 import com.bdxh.module_task.model.ViewModelTask;
 import com.bdxh.module_task.model.bean.TaskResult;
 import com.sankuai.waimai.router.annotation.RouterProvider;
@@ -15,9 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 @RouterService(interfaces = ITaskService.class , key = "/task_fragment" , singleton = true)
-public class TaskFragment extends BaseFragment<ViewModelTask> implements ITaskService {
+public class TaskFragment extends MvvmBaseFragment<ModuleTaskFragmentTaskBinding,ViewModelTask> implements ITaskService {
 
-    private TextView txt;
     private ViewModelTask modelTask;
 
     @Override
@@ -27,7 +28,6 @@ public class TaskFragment extends BaseFragment<ViewModelTask> implements ITaskSe
 
     @Override
     protected void initView() {
-        txt = findViewById(R.id.module_task_txt);
         modelTask = model;
 
         modelTask.getTaskData().observe(this, taskResult -> {
@@ -35,8 +35,13 @@ public class TaskFragment extends BaseFragment<ViewModelTask> implements ITaskSe
                 return;
             }
             String liveDataStr = "LiveData更新数据";
-            txt.setText(liveDataStr);
+            binding.moduleTaskTxt.setText(liveDataStr);
         });
+    }
+
+    @Override
+    public int initVariableId() {
+        return 0;
     }
 
     @Override

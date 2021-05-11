@@ -17,6 +17,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <!--  更习惯这种写法 简单 -->
+        <fragment
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btn_nav"
             android:layout_width="match_parent"

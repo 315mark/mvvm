@@ -10,7 +10,7 @@ import com.sankuai.waimai.router.annotation.RouterUri;
 import androidx.lifecycle.Observer;
 
 @RouterUri(path = RouterConstants.JUMP_MAIN)
-public class LoginActivity extends BaseActivity<ViewModelLogin, ModuleLoginActivityLoginBinding> {
+public class LoginActivity extends BaseActivity<ViewModelLogin , ModuleLoginActivityLoginBinding> {
 
     private ViewModelLogin mViewModel;
 
