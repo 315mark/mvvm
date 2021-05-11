@@ -3,17 +3,22 @@ package com.bdxh.myapplication;
 import android.app.Application;
 import android.util.Log;
 
+import com.bdxh.librarybase.base.BaseApplication;
+import com.bdxh.module_base.config.ModuleConfig;
 import com.tencent.smtt.sdk.QbSdk;
 
 import java.lang.reflect.Modifier;
 
-public class APPAplication extends Application {
+// 打开登陆页面
+public class APPAplication extends BaseApplication {
 
     @Override
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
 
+        //组件化初始化
+        ModuleConfig.getInstance().init(this);
 
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
 		

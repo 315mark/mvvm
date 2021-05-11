@@ -32,7 +32,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity
+
+      <!--  运行组件下面就不需要使用了  -->
+      <!--  <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
@@ -44,12 +46,12 @@
         <activity
             android:name=".TestActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
-            <!--<intent-filter>
+            &lt;!&ndash;<intent-filter>
                  <action android:name="android.intent.action.MAIN"/>
 
                  <category android:name="android.intent.category.LAUNCHER"/>
-             </intent-filter>-->
-        </activity>
+             </intent-filter>&ndash;&gt;
+        </activity>-->
     </application>
 
 </manifest>
