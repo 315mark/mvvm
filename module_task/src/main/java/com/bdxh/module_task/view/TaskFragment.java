@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.bdxh.librarybase.base.BaseFragment;
 import com.bdxh.librarybase.base.MvvmBaseFragment;
 import com.bdxh.module_base.service.ITaskService;
+import com.bdxh.module_task.BR;
 import com.bdxh.module_task.R;
 import com.bdxh.module_task.databinding.ModuleTaskFragmentTaskBinding;
 import com.bdxh.module_task.model.ViewModelTask;
@@ -39,9 +40,10 @@ public class TaskFragment extends MvvmBaseFragment<ModuleTaskFragmentTaskBinding
         });
     }
 
+    //
     @Override
     public int initVariableId() {
-        return 0;
+        return BR._all;
     }
 
     @Override

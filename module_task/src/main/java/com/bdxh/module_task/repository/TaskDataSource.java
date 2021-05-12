@@ -1,7 +1,7 @@
 package com.bdxh.module_task.repository;
 
 import android.app.Application;
-import com.bdxh.librarybase.RetrofitManager;
+import com.bdxh.librarybase.http.retrofit.RetrofitManager;
 import com.bdxh.librarybase.base.BaseViewModel;
 import androidx.annotation.NonNull;
 

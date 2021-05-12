@@ -24,7 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import qiu.niorgai.StatusBarCompat;
 
@@ -51,6 +53,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
     private void initViewDataBind() {
         databind = DataBindingUtil.setContentView(this, getLayout());
         databind.executePendingBindings();
+        databind.setLifecycleOwner(this);
     }
 
     protected abstract int getLayout();
@@ -99,6 +102,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
             model = (VM) createViewModel(this, modelClass);
         }
         getLifecycle().addObserver(model);
+
     }
 
     public void showEmptyView(View view){
@@ -113,8 +117,15 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
         return null;
     }
 
+    //普通ViewModel
     public <T extends ViewModel> T createViewModel(BaseActivity context, Class<T> clazz) {
         return ViewModelProviders.of(context).get(clazz);
+    }
+
+    //数据持久化保存
+    public <T extends ViewModel> T saveStateViewModel(BaseActivity context, Class<T> clazz) {
+//        return new ViewModelProvider(this,new SavedStateViewModelFactory(getApplication(),this)).get(clazz);
+        return ViewModelProviders.of(context,new SavedStateViewModelFactory(getApplication(),this)).get(clazz);
     }
 
     //第三步 初始化Router

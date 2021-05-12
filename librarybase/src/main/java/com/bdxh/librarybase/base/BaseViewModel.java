@@ -4,12 +4,14 @@ import android.app.Application;
 
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
+import com.uber.autodispose.ObservableSubscribeProxy;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+import io.reactivex.ObservableConverter;
 
 public class BaseViewModel extends AndroidViewModel implements IBaseViewModel{
 

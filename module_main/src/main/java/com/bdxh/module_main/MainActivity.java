@@ -3,6 +3,7 @@ package com.bdxh.module_main;
 import android.view.MenuItem;
 
 import com.bdxh.librarybase.base.BaseActivity;
+import com.bdxh.librarybase.http.download.ProgressCallBack;
 import com.bdxh.module_base.service.IMineService;
 import com.bdxh.module_base.service.IOrderService;
 import com.bdxh.module_base.service.ITaskService;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Observer;
+import okhttp3.ResponseBody;
 
 @RouterUri(path = RouterConstants.JUMP_MAIN)
 public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivityMainBinding> {
@@ -28,13 +30,16 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
     private List<Fragment> fragmentList;
     //这里是BottomNavigationView 和 ViewPager 配合使用
 
+    String destFileDir = getApplication().getCacheDir().getPath();
+    String destFileName = System.currentTimeMillis() + ".apk";
+
     @Override
     protected int getLayout(){
         return R.layout.module_main_activity_main;
     }
 
     @Override
-    protected void initView() {
+    protected void initView(){
         // dataBinding
         databind.viewPageMain.setCanScroll(false);
         databind.viewPageMain.setOffscreenPageLimit(3);
@@ -42,7 +47,7 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if (itemId == R.id.tab_task) {
+                if (itemId == R.id.tab_task){
                     currentPosition = 0;
                 } else if (itemId == R.id.tab_order) {
                     currentPosition = 1;
@@ -66,6 +71,23 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
                         ToastUtils.showShort(s);
                     }
                 });
+
+        model.downLoadApp(new ProgressCallBack<ResponseBody>(this,destFileDir, destFileName) {
+            @Override
+            public void onSuccess(ResponseBody responseBody) {
+
+            }
+
+            @Override
+            public void progress(long progress, long total) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
     private void initFragment() {
@@ -100,4 +122,6 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
             }
         });
     }
+
+
 }

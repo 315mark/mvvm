@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jeremyliao.liveeventbus.utils.AppUtils;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import androidx.annotation.NonNull;
@@ -11,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -109,6 +113,7 @@ public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends Bas
             model = (M) createViewModel(this ,modelClass);
         }
 
+
 //        binding.setVariable(viewModelId,model);
         /*
          * 让ViewModel拥有View的生命周期感应
@@ -146,6 +151,12 @@ public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends Bas
 
     public <T extends ViewModel> T createViewModel(Fragment context, Class<T> clazz){
         return ViewModelProviders.of(context).get(clazz);
+    }
+
+
+    //持久化保存
+    public <T extends ViewModel> T saveStateViewModel(Fragment context, Class<T> clazz){
+        return ViewModelProviders.of(context,new SavedStateViewModelFactory(AppUtils.getApp(),this)).get(clazz);
     }
 
 }
