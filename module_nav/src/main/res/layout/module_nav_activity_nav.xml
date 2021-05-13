@@ -6,33 +6,35 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingTop="?attr/actionBarSize">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/module_nav_menu" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/navigation_card"
+            android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/module_nav_nav_graph"
-            />
-            <!-- app:navGraph="@navigation/fragment_manager" -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/module_nav_btn_nav"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:elevation="10dp"
-            android:background="@color/bg_white"
-            app:itemBackground="@color/bg_white"
-            app:itemIconTint="@null"
-            app:itemTextColor="@color/bg_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/module_nav_navigation"
-        />
+            app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/module_nav_navigation" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

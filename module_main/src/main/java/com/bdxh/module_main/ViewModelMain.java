@@ -1,15 +1,12 @@
 package com.bdxh.module_main;
 
 import android.app.Application;
-
 import com.bdxh.librarybase.base.BaseViewModel;
 import com.bdxh.librarybase.http.download.DownLoadSubscriber;
 import com.bdxh.librarybase.http.download.ProgressCallBack;
 import com.bdxh.librarybase.http.retrofit.RetrofitManager;
 import com.bdxh.librarybase.utils.RxUtils;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -44,7 +41,6 @@ public class ViewModelMain extends BaseViewModel implements IDownLoadSource {
                        }
                    })
                    .as(this.<ResponseBody>bindLifecycle())
-
                    .subscribe(new DownLoadSubscriber<ResponseBody>(callBack));
     }
 
@@ -53,6 +49,7 @@ public class ViewModelMain extends BaseViewModel implements IDownLoadSource {
     private ApiService getDownLoadApp(){
        return RetrofitManager.getInstance().getApiService(ApiService.class,BASE_URL);
     }
+
     private interface ApiService {
         @Streaming
         @GET

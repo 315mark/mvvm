@@ -20,6 +20,12 @@ public class LoginActivity extends BaseActivity<ViewModelLogin , ModuleLoginActi
     }
 
     @Override
+    public void initData() {
+        super.initData();
+
+    }
+
+    @Override
     protected void initView(){
         mViewModel = model;
 

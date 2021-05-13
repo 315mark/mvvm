@@ -75,12 +75,11 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
         model.downLoadApp(new ProgressCallBack<ResponseBody>(this,destFileDir, destFileName) {
             @Override
             public void onSuccess(ResponseBody responseBody) {
-
             }
 
             @Override
             public void progress(long progress, long total) {
-
+                LiveEventBus.get("DOWN_LOAD_PROGRESS").post(progress);
             }
 
             @Override
@@ -122,6 +121,5 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
             }
         });
     }
-
 
 }
