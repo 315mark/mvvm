@@ -17,12 +17,7 @@ public class NotificationsFragment extends MvvmBaseFragment<ModuleNavFragmentNot
 
     @Override
     protected void initView() {
-        model.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                binding.textNotifications.setText(s);
-            }
-        });
+
     }
 
     @Override

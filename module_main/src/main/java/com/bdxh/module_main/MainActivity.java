@@ -24,7 +24,7 @@ import androidx.lifecycle.Observer;
 import okhttp3.ResponseBody;
 
 @RouterUri(path = RouterConstants.JUMP_MAIN)
-public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivityMainBinding> {
+public class MainActivity extends BaseActivity<ViewModelMain, ModuleMainActivityMainBinding> {
 
     private int currentPosition = 0;
     private List<Fragment> fragmentList;
@@ -34,12 +34,12 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
     String destFileName = System.currentTimeMillis() + ".apk";
 
     @Override
-    protected int getLayout(){
+    protected int getLayout() {
         return R.layout.module_main_activity_main;
     }
 
     @Override
-    protected void initView(){
+    protected void initView() {
         // dataBinding
         databind.viewPageMain.setCanScroll(false);
         databind.viewPageMain.setOffscreenPageLimit(3);
@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                if (itemId == R.id.tab_task){
+                if (itemId == R.id.tab_task) {
                     currentPosition = 0;
                 } else if (itemId == R.id.tab_order) {
                     currentPosition = 1;
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity<ViewModelMain ,ModuleMainActivity
                     }
                 });
 
-        model.downLoadApp(new ProgressCallBack<ResponseBody>(this,destFileDir, destFileName) {
+        model.downLoadApp(new ProgressCallBack<ResponseBody>(this, destFileDir, destFileName) {
             @Override
             public void onSuccess(ResponseBody responseBody) {
             }

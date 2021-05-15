@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends BaseViewModel {
 
-    private MutableLiveData<String> mText;
+    public MutableLiveData<String> mText;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);

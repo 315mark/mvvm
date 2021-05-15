@@ -15,6 +15,7 @@ public class DashboardFragment extends MvvmBaseFragment<ModuleNavFragmentDashboa
 
     @Override
     protected void initView() {
+        //这是代码赋值  布局赋值更方便
         model.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 public class DashboardViewModel extends BaseViewModel {
 
-    private MutableLiveData<String> mText;
+    public MutableLiveData<String> mText;
 
     public DashboardViewModel(@NonNull Application application) {
         super(application);

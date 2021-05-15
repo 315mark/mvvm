@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 public class NotificationsViewModel extends BaseViewModel {
 
-    private MutableLiveData<String> mText;
+   public MutableLiveData<String> mText;
 
     public NotificationsViewModel(@NonNull Application application) {
         super(application);
