@@ -1,13 +1,7 @@
 package com.bdxh.myapplication;
 
-import android.app.Application;
-import android.util.Log;
-
 import com.bdxh.librarybase.base.BaseApplication;
 import com.bdxh.module_base.config.ModuleConfig;
-import com.tencent.smtt.sdk.QbSdk;
-
-import java.lang.reflect.Modifier;
 
 // 打开登陆页面
 public class APPAplication extends BaseApplication {

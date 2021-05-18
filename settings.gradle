@@ -1,3 +1,4 @@
+include ':moudle_room'
 include ':module_nav'
 include ':app', ':librarybase', ':module_base', ':module_main', ':module_order', ':module_task',  ':module_login'
 rootProject.name='My Application'

@@ -1,101 +1,24 @@
 package com.bdxh.librarybase.base;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.jeremyliao.liveeventbus.utils.AppUtils;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
-public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends BaseViewModel> extends Fragment implements IBaseView {
+public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends BaseViewModel> extends BaseFragment<VD> {
 
-    protected VD binding ;
     protected M model;
     protected int viewModelId;
-    protected BaseActivity mActivity;
-    private View layout;
-    private boolean isNavigationViewInit = false; // 记录是否已经初始化过一次视图
-    protected View lastView = null; // 记录上次创建的view
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        //界面初始化传递数据
-        initBundle();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //fragment 的view 已经创建则不再创建
-        if (lastView == null) {
-            binding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
-            binding.setLifecycleOwner(this);
-            lastView = binding.getRoot();
-        }
-        return lastView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (isNavigationViewInit ) { //初始化的视图不在初始化
-            super.onViewCreated(view, savedInstanceState);
-            //私有初始化DataBinding 和ViewModel
-            initViewModel();
-            initView();
-            initData();
-            //页面事件监听方法 ,用于viewmodel到 view层的注册
-            initViewObservable();
-        }
-        isNavigationViewInit = true ;
-    }
-
-    protected abstract int getLayoutId();
-
-    protected abstract void initView();
-
 
     /**
      * 初始化ViewModel的id
      */
     public abstract int initVariableId();
 
-
-    /**
-     *  界面初始化数据传递
-     */
-    @Override
-    public void initBundle() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void initViewObservable() {
-
-    }
-
-    @Override
-    public void onReload() {
-
-    }
-
-    private void initViewModel(){
+    protected void initViewModel(){
         viewModelId = initVariableId();
         model = getViewModel();
         if (model == null) {
@@ -110,11 +33,11 @@ public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends Bas
                 //没有指定泛型参数,默认使用BaseViewModel
                 modelClass = BaseViewModel.class ;
             }
-            model = (M) createViewModel(this ,modelClass);
+            model = (M) createViewModel(modelClass);
         }
 
 
-//        binding.setVariable(viewModelId,model);
+        //   binding.setVariable(viewModelId,model);
         /*
          * 让ViewModel拥有View的生命周期感应
          * viewModel implements IBaseViewModel接口
@@ -124,14 +47,6 @@ public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends Bas
          * BaseViewModel中实现了IBaseViewModel中的类似生命周期的观察
          */
         getLifecycle().addObserver(model);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (binding != null) {
-            binding.unbind();
-        }
     }
 
     @Override
@@ -149,14 +64,14 @@ public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends Bas
         return null;
     }
 
-    public <T extends ViewModel> T createViewModel(Fragment context, Class<T> clazz){
-        return ViewModelProviders.of(context).get(clazz);
+    public <T extends ViewModel> T createViewModel( Class<T> clazz){
+        return ViewModelProviders.of(this).get(clazz);
     }
 
 
     //持久化保存
-    public <T extends ViewModel> T saveStateViewModel(Fragment context, Class<T> clazz){
-        return ViewModelProviders.of(context,new SavedStateViewModelFactory(AppUtils.getApp(),this)).get(clazz);
+    public <T extends ViewModel> T saveStateViewModel(Class<T> clazz){
+        return ViewModelProviders.of(this,new SavedStateViewModelFactory(AppUtils.getApp(),this)).get(clazz);
     }
 
 }

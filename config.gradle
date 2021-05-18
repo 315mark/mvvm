@@ -79,15 +79,19 @@ ext{
 
             // lifecycle only (without ViewModel or LiveData)
             // implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-            // optional - RxJava2 support
-            "paging_runtime"         : "androidx.paging:paging-rxjava2:${versions["paging_version"]}",
+            // optional - RxJava2 support  引用一个就好
+            "paging_runtime"         : "androidx.paging:paging-runtime:${versions["paging_version"]}",
+            "paging_rxjava"         : "androidx.paging:paging-rxjava2:${versions["paging_version"]}",
+            // alternatively - without Android dependencies for tests
+            //testImplementation "androidx.paging:paging-common:$paging_version"
+            "paging_common"          : "androidx.paging:paging-common:${versions["paging_version"]}",
 
             "multiDex"               : "androidx.multidex:multidex:${versions["multidex"]}" ,
 
             "navigation_fragment"    : "androidx.navigation:navigation-fragment:${versions["navigation_ui"]}",
             "navigation_ui"          : "androidx.navigation:navigation-ui:${versions["navigation_ui"]}",
             // optional - RxJava2 support for Room
-            "room-rxjava2"           : "androidx.room:room-rxjava2:${versions["room_version"]}",
+            "room_rxjava"            : "androidx.room:room-rxjava2:${versions["room_version"]}",
             "room_runtime"           : "androidx.room:room-runtime:${versions["room_version"]}",
     ]
 

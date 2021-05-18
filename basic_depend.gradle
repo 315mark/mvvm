@@ -74,6 +74,9 @@ dependencies {
     api JetPack.lifecycle_extensions
     api JetPack.viewmodel_savedstate
     api JetPack.lifecycle_livedata
+    api JetPack.paging_runtime
+    api JetPack.paging_rxjava
+    testApi JetPack.paging_common
 
     api (rxJava.okhttp_logging){
         exclude group : 'com.squareup.okhttp3'

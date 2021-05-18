@@ -1,0 +1,37 @@
+apply from: "../module_base.gradle"
+
+def globalConfig = rootProject.ext
+def compilers = globalConfig.compiler
+def jetpack = globalConfig.jetPack
+
+android {
+
+    defaultConfig {
+        // 组件单独运行时需要的applicationId
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.bdxh.module_room"
+        }
+    }
+    //统一资源前缀，规范资源引用 尽量命名规范
+    resourcePrefix "module_room"
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+
+    api jetpack.room_rxjava
+    api jetpack.room_runtime
+    annotationProcessor compilers.room_compiler
+
+    api project(path: ':module_base')
+    annotationProcessor compilers.router_compiler
+}

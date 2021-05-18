@@ -10,16 +10,17 @@ import java.lang.reflect.Type;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
-public abstract class BaseFragment<M extends BaseViewModel> extends Fragment implements IBaseView {
+public abstract class BaseFragment<VD extends ViewDataBinding> extends Fragment implements IBaseView {
 
-    protected M model;
-    protected BaseActivity mActivity;
+    protected VD binding ;
+    protected AppCompatActivity mActivity;
     private View layout;
     private boolean isNavigationViewInit = false; // 记录是否已经初始化过一次视图
     protected View lastView = null; // 记录上次创建的view
@@ -27,27 +28,43 @@ public abstract class BaseFragment<M extends BaseViewModel> extends Fragment imp
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (BaseActivity) context;
+        mActivity = (AppCompatActivity) context;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        //界面初始化传递数据
         initBundle();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
-        layout = view;
-        initViewObservable();
-        initViewModel();
-        initBundle();
-        initView();
-        initData();
-        return view;
+        //fragment 的view 已经创建则不再创建
+        if (lastView == null) {
+            binding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+            binding.setLifecycleOwner(this);
+            lastView = binding.getRoot();
+        }
+        return lastView;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        if (isNavigationViewInit ) { //初始化的视图不在初始化
+            super.onViewCreated(view, savedInstanceState);
+            //私有初始化DataBinding 和ViewModel
+            initViewModel();
+            initView();
+            initData();
+            //页面事件监听方法 ,用于viewmodel到 view层的注册
+            initViewObservable();
+        }
+        isNavigationViewInit = true ;
+    }
+
+    protected abstract void initViewModel();
 
     protected abstract int getLayoutId();
 
@@ -77,40 +94,11 @@ public abstract class BaseFragment<M extends BaseViewModel> extends Fragment imp
 
     }
 
-    private void initViewModel(){
-        model = getViewModel();
-        if (model == null) {
-            Class modelClass;
-            Type type = getClass().getGenericSuperclass();
-            if (type instanceof ParameterizedType) {
-                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
-            }else{
-                //没有指定泛型参数,默认使用BaseViewModel
-                modelClass = BaseViewModel.class ;
-            }
-            model = (M) createViewModel(this ,modelClass);
-        }
-        //让ViewModel 拥有View的生命周期感应
-        getLifecycle().addObserver(model);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //解除ViewModel 生命周期绑定
-        getLifecycle().removeObserver(model);
-    }
-
-    public M getViewModel() {
-        return null;
-    }
-
-    public <T extends ViewModel> T createViewModel(BaseFragment context, Class<T> clazz){
-        return ViewModelProviders.of(context).get(clazz);
+        if (binding != null) {
+            binding.unbind();
+        }
     }
 }

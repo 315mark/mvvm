@@ -1,21 +1,15 @@
 package com.bdxh.module_task.view;
 
 import android.os.Handler;
-import android.widget.TextView;
-
-import com.bdxh.librarybase.base.BaseFragment;
 import com.bdxh.librarybase.base.MvvmBaseFragment;
 import com.bdxh.module_base.service.ITaskService;
 import com.bdxh.module_task.BR;
 import com.bdxh.module_task.R;
 import com.bdxh.module_task.databinding.ModuleTaskFragmentTaskBinding;
 import com.bdxh.module_task.model.ViewModelTask;
-import com.bdxh.module_task.model.bean.TaskResult;
 import com.sankuai.waimai.router.annotation.RouterProvider;
 import com.sankuai.waimai.router.annotation.RouterService;
-
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
 @RouterService(interfaces = ITaskService.class , key = "/task_fragment" , singleton = true)
 public class TaskFragment extends MvvmBaseFragment<ModuleTaskFragmentTaskBinding,ViewModelTask> implements ITaskService {

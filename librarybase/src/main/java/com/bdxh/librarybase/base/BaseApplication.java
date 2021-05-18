@@ -4,17 +4,23 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import com.jeremyliao.liveeventbus.utils.AppUtils;
+import com.tencent.mmkv.MMKV;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-//
 public class BaseApplication extends Application {
 
     private static Application mInstance;
+    private static MMKV mmkv;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        //初始化MMKV  保存文件可以自己设置
+        MMKV.initialize(this);
+        mmkv =MMKV.defaultMMKV();
+
         setInstance(this);
     }
 

@@ -58,7 +58,6 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel{
 
     public <T> AutoDisposeConverter<T> bindLifecycle() {
         return AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(getApplication())
-        );
+                AndroidLifecycleScopeProvider.from(getApplication()));
     }
 }

@@ -1,13 +1,17 @@
 package com.bdxh.module_order;
 
-import com.bdxh.librarybase.base.BaseFragment;
+import com.bdxh.librarybase.base.BaseViewModel;
+import com.bdxh.librarybase.base.MvvmBaseFragment;
 import com.bdxh.module_base.service.IOrderService;
+import com.bdxh.module_order.databinding.ModuleOrderFragmentOrderBinding;
 import com.sankuai.waimai.router.annotation.RouterProvider;
 import com.sankuai.waimai.router.annotation.RouterService;
+
 import androidx.fragment.app.Fragment;
 
 @RouterService(interfaces = IOrderService.class ,key = "/order_fragment" , singleton = true)
-public class OrderFragment extends BaseFragment implements IOrderService{
+public class OrderFragment extends MvvmBaseFragment<ModuleOrderFragmentOrderBinding, BaseViewModel> implements IOrderService{
+
     @Override
     protected int getLayoutId() {
         return R.layout.module_order_fragment_order;
@@ -16,6 +20,11 @@ public class OrderFragment extends BaseFragment implements IOrderService{
     @Override
     protected void initView() {
 
+    }
+
+    @Override
+    public int initVariableId() {
+        return 0;
     }
 
     @Override
