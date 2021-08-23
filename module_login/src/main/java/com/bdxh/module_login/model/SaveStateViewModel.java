@@ -3,7 +3,6 @@ package com.bdxh.module_login.model;
 import android.app.Application;
 import com.bdxh.librarybase.base.BaseViewModel;
 import com.jeremyliao.liveeventbus.utils.AppUtils;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
@@ -16,9 +15,9 @@ public class SaveStateViewModel extends BaseViewModel {
 
     private SavedStateHandle savedStateHandle;
 
-    private static  final String KEY_A_NUMBER = "A_number";
+    private static final String KEY_A_NUMBER = "A_number";
 
-    public SaveStateViewModel(@NonNull Application application) {
+    public SaveStateViewModel(@NonNull Application application){
         super(application);
     }
 

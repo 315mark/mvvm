@@ -16,7 +16,7 @@ public abstract class MvvmBaseFragment<VD extends ViewDataBinding, M extends Bas
     /**
      * 初始化ViewModel的id
      */
-    public abstract int initVariableId();
+    protected abstract int initVariableId();
 
     protected void initViewModel(){
         viewModelId = initVariableId();

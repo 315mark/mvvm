@@ -29,5 +29,6 @@ public class BaseModule implements IBaseModule {
     private void InitWMRouter() {
         DefaultRootUriHandler rootHandler = new DefaultRootUriHandler(BaseApplication.getInstance());
         Router.init(rootHandler);
+
     }
 }

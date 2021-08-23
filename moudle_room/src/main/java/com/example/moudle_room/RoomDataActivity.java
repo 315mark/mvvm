@@ -45,6 +45,7 @@ public class RoomDataActivity extends BaseActivity<BaseViewModel, ModuleRoomPage
                     @Override
                     public void onChanged(int position, int count) {
                         LogUtils.d(" onChanged " + students);
+
                     }
 
                     @Override

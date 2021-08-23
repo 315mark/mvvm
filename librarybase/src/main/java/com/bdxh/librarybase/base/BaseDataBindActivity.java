@@ -125,5 +125,4 @@ public abstract class BaseDataBindActivity<Bind extends ViewDataBinding> extends
                 })
         );
     }
-
 }

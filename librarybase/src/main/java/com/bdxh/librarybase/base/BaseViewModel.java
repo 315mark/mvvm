@@ -1,6 +1,7 @@
 package com.bdxh.librarybase.base;
 
 import android.app.Application;
+import android.view.View;
 
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.AutoDisposeConverter;
@@ -17,6 +18,7 @@ public class BaseViewModel extends AndroidViewModel implements IBaseViewModel{
 
     // AndroidViewModel 是ViewModel 子类 可以直接调用getApplication（）访问应用的全局资源
     // getApplication().getResources().getString()
+    // paging 使用recyclerview需要在重写此方法中进行初始化
     public BaseViewModel(@NonNull Application application) {
         super(application);
     }

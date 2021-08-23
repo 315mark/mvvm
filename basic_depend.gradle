@@ -78,6 +78,9 @@ dependencies {
     api JetPack.paging_rxjava
     testApi JetPack.paging_common
 
+    api "androidx.activity:activity:1.2.0"
+    api "androidx.fragment:fragment:1.3.0"
+
     api (rxJava.okhttp_logging){
         exclude group : 'com.squareup.okhttp3'
     }

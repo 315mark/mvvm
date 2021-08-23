@@ -7,6 +7,7 @@ import com.bdxh.librarybase.http.download.ProgressCallBack;
 import com.bdxh.librarybase.http.retrofit.RetrofitManager;
 import com.bdxh.librarybase.utils.RxUtils;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;

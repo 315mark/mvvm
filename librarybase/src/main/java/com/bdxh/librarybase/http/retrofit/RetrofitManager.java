@@ -10,12 +10,10 @@ import com.bdxh.librarybase.http.interceptor.CacheInterceptor;
 import com.bdxh.librarybase.http.interceptor.ProgressInterceptor;
 import com.bdxh.librarybase.utils.HttpsUtils;
 import com.blankj.utilcode.BuildConfig;
-import com.jeremyliao.liveeventbus.logger.Logger;
 import com.jeremyliao.liveeventbus.utils.AppUtils;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

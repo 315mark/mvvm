@@ -1,6 +1,7 @@
 package com.bdxh.module_nav.ui.home;
 
 import com.bdxh.librarybase.base.MvvmBaseFragment;
+import com.bdxh.module_nav.BR;
 import com.bdxh.module_nav.R;
 import com.bdxh.module_nav.databinding.ModuleNavFragmentHomeBinding;
 
@@ -26,6 +27,6 @@ public class HomeFragment extends MvvmBaseFragment<ModuleNavFragmentHomeBinding,
 
     @Override
     public int initVariableId() {
-        return 0;
+        return BR.home;
     }
 }

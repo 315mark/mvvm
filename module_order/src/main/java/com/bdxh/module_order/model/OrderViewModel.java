@@ -18,7 +18,7 @@ public class OrderViewModel extends BaseViewModel {
     public LiveData<PagedList<Order>> liveData;
     private Order mOrder;
 
-    public OrderViewModel(@NonNull Application application) {
+    public OrderViewModel(@NonNull Application application){
         super(application);
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(true)  // 用于设置控件占位

@@ -20,5 +20,4 @@ public abstract class StudentDataBase extends RoomDatabase {
     }
 
     public abstract  StudentDao getStudentDao();
-
 }

@@ -87,6 +87,8 @@ public class MainActivity extends BaseActivity<ViewModelMain, ModuleMainActivity
 
             }
         });
+
+
     }
 
     private void initFragment() {
@@ -102,6 +104,7 @@ public class MainActivity extends BaseActivity<ViewModelMain, ModuleMainActivity
             //单独运行main组件,无法获取fragment组件实例,正常使用时应与需要加载的组件集成使用
             ToastUtils.showShort("单独运行main组件,无法获取fragment组件实例");
         }
+
         Fragment taskFragment = taskService.provideInstance();
         Fragment orderFragment = orderService.provideInstance();
         Fragment mineFragment = mineService.provideInstance();

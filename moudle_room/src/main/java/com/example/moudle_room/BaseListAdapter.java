@@ -1,5 +1,7 @@
 package com.example.moudle_room;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.databinding.ObservableArrayList;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
@@ -18,7 +20,7 @@ public abstract class BaseListAdapter<M, VH extends RecyclerView.ViewHolder> ext
         this.mItemsChangeCallback = new ListChangedCallbackProxy(this);
     }
 
-    public ObservableArrayList<M> getItems() {
+    public ObservableArrayList<M> getItems(){
         return mItems;
     }
 
@@ -28,13 +30,13 @@ public abstract class BaseListAdapter<M, VH extends RecyclerView.ViewHolder> ext
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NotNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         this.mItems.addOnListChangedCallback(mItemsChangeCallback);
     }
 
     @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+    public void onDetachedFromRecyclerView(@NotNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
         this.mItems.removeOnListChangedCallback(mItemsChangeCallback);
     }

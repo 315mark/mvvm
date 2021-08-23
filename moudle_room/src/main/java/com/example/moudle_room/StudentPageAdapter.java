@@ -1,18 +1,12 @@
 package com.example.moudle_room;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.example.moudle_room.databinding.ModuleRoomCellBinding;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +34,6 @@ public class StudentPageAdapter extends BaseListAdapter<Student, StudentPageAdap
     }
 
     public static class StudentViewHolder extends RecyclerView.ViewHolder {
-
         ModuleRoomCellBinding binding;
 
         StudentViewHolder(ModuleRoomCellBinding binding) {
