@@ -73,7 +73,7 @@ public abstract class BaseDataBindActivity<Bind extends ViewDataBinding> extends
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();  //super.XX(); 重写 如果父类有代码 会执行父类方法代码
+        super.onDestroy();  //super.XX(); 重写 如果父类有代码 会执行父类方法代码  git config --system http.sslcainfo "C:\ruanjian\Git\bin\curl-ca-bundle.crt"
         if (databind != null){
             databind.unbind();
         }
